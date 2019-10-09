@@ -14,7 +14,7 @@ export default class telaInicial extends Component {
 
       };
 
-      this.mudaPagina = this.mudaPagina.bind(this)
+      //this.mudaPagina = this.mudaPagina.bind(this)
      
     }
 
@@ -25,7 +25,7 @@ export default class telaInicial extends Component {
   render(){
     return (
       <View style={styles.tela}>
-        <TouchableOpacity style={styles.botao} metodo={this.mudaPagina}>
+        <TouchableOpacity style={styles.botao} onPress={() => this.props.navigation.navigate('Receita')}>
           <View style={styles.container}>
             <View style={styles.container_central}>
               <Text style={styles.texto}>Pesquisar Receitas</Text>
