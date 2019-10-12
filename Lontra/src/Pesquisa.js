@@ -30,8 +30,15 @@ export default class telaInicial extends Component {
   alerta(){
 
     let aux = this.state.ingredientes;
+    var lista = []
+    for(var i=0; i < aux.length; i++){
+      if(aux[i] != ''){
+        lista.push(aux[i])
+      }
+    }
+    this.setState({ ingredientes: lista })
 
-    alert(aux)
+    alert(lista)
   }
   render() {
     return (
@@ -62,6 +69,7 @@ export default class telaInicial extends Component {
         <View>
           <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
             <TouchableOpacity onPress={() => {
+              this.adicionaTextInput
               let ingredientes = this.state.ingredientes;
               ingredientes.push('')
               this.setState({ ingredientes: ingredientes })
