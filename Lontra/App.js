@@ -4,11 +4,16 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 
 import Receita from './src/Receita';
+import ReceitasBuscadas from './src/ReceitasBuscadas';
 import telaInicial from './src/telaInicial';
 import Pesquisa from './src/Pesquisa';
 
 const stackNavigation = createStackNavigator(
 	{
+		ReceitasBuscadas:{
+			screen: ReceitasBuscadas,
+			title: 'ReceitasBuscadas'
+		},
 		telaInicial: {
 			screen: telaInicial,
 			title: 'Lontra'
@@ -20,7 +25,7 @@ const stackNavigation = createStackNavigator(
 		Pesquisa: {
 			screen: Pesquisa,
 			title: 'Pesquisa'
-		}
+		},
 	},
 	{
 		defaultNavigationOptions: {
