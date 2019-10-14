@@ -10,6 +10,10 @@ import Pesquisa from './src/Pesquisa';
 
 const stackNavigation = createStackNavigator(
 	{
+		Pesquisa: {
+			screen: Pesquisa,
+			title: 'Pesquisa'
+		},
 		ReceitasBuscadas:{
 			screen: ReceitasBuscadas,
 			title: 'ReceitasBuscadas'
@@ -21,10 +25,6 @@ const stackNavigation = createStackNavigator(
 		Receita: {
 			screen: Receita,
 			title: 'Receita'
-		},
-		Pesquisa: {
-			screen: Pesquisa,
-			title: 'Pesquisa'
 		},
 	},
 	{

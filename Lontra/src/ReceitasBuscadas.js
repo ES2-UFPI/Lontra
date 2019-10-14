@@ -23,6 +23,14 @@ export default class ReceitasBuscadas extends Component {
 
     this.renderizarReceita = this.renderizarReceita.bind(this)
 
+    fetch('url da API')
+    .then((r) => r.json())
+    .then((json) => {
+      let aux = this.state;
+      aux.resultado = json;
+      this.setState(aux);
+    });
+
   }
 
   renderizarReceita(item){
@@ -59,6 +67,15 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     marginTop: 5,
     fontSize: 18
+  },
+  areaPost:{
+    shadowColor: '#000000',
+    backgroundColor: '#FFFFFF',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 1,
+    shadowRadius: 4,
+    borderRadius: 6,
+    elevation: 4
   },
   imagem:{
       width: 120,

@@ -39,6 +39,10 @@ export default class telaInicial extends Component {
     this.setState({ ingredientes: lista })
 
     alert(lista)
+
+    this.props.navigation.navigate('ReceitasBuscadas');
+
+    //Aqui eu tenho que enviar a lista pra API
   }
   render() {
     return (
