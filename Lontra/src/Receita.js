@@ -69,8 +69,7 @@ const styles = StyleSheet.create({
     },
     imagem: {
         height: 203,
-        resizeMode: 'contain',
-        borderRadius: 6
+        resizeMode: 'contain'
     },
     titulo: {
         fontSize: 20,
