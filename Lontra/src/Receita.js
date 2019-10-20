@@ -74,14 +74,14 @@ const styles = StyleSheet.create({
     },
     titulo: {
         fontSize: 20,
-        color: 'orange', 
+        color: '#ff6347', 
         marginVertical: 8,
         fontWeight: 'bold'
     },
     detalhes: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: 'orange',
+        backgroundColor: '#ff6347',
         padding: 8,
         borderRadius: 8,
         fontSize: 18,

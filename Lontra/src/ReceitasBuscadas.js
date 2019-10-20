@@ -26,9 +26,7 @@ export default class ReceitasBuscadas extends Component {
     fetch('url da API')
     .then((r) => r.json())
     .then((json) => {
-      let aux = this.state;
-      aux.resultado = json;
-      this.setState(aux);
+      this.setState({resultado: json});
     });
 
   }
@@ -44,7 +42,7 @@ export default class ReceitasBuscadas extends Component {
                         <Text> Feita por: {item.autor}</Text>
                     </View>
                 </View>
-                <View style={{borderTopWidth: 1}}></View>
+                <View style={{borderTopWidth: 1, borderTopColor: '#ff4500', opacity: 0.5}}></View>
             </TouchableOpacity>
           </View>
       );
