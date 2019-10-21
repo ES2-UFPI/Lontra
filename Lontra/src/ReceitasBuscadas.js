@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, Button, Icon, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
+console.disableYellowBox = true;
 
 
 export default class ReceitasBuscadas extends Component {
@@ -11,52 +12,60 @@ export default class ReceitasBuscadas extends Component {
     super(props);
 
     this.state = {
-        resultado:[
-            {key: '1', img: 'https://img.itdg.com.br/tdg/images/recipes/000/010/254/294238/294238_original.jpg?mode=crop&width=160&height=160', titulo: 'Fricassê de Frango', autor: 'Kenia'},
-            {key: '2', img: 'https://img.itdg.com.br/tdg/images/recipes/000/001/282/317634/317634_original.jpg?mode=crop&amp;width=160&amp;height=160', titulo: 'Fricassê de Frango', autor: 'Kenia'},
-            {key: '3', img: 'https://img.itdg.com.br/tdg/images/recipes/000/000/072/38758/38758_original.jpg?mode=crop&amp;width=160&amp;height=160', titulo: 'Fricassê de Frango', autor: 'Kenia'},
-            {key: '4', img: 'https://img.itdg.com.br/tdg/images/recipes/000/010/254/294238/294238_original.jpg?mode=crop&width=160&height=160', titulo: 'Fricassê de Frango', autor: 'Kenia'},
-            {key: '5', img: 'https://img.itdg.com.br/tdg/images/recipes/000/001/282/317634/317634_original.jpg?mode=crop&amp;width=160&amp;height=160', titulo: 'Fricassê de Frango', autor: 'Kenia'},
-        ]
+        resultado:[],
+        carregado: false
       
     };
 
     this.renderizarReceita = this.renderizarReceita.bind(this)
+    this.mudaPagina = this.mudaPagina.bind(this)
 
-    fetch('url da API')
+
+    fetch('http://10.13.65.121:8000/receitas/?format=json')
     .then((r) => r.json())
     .then((json) => {
-      let aux = this.state;
-      aux.resultado = json;
-      this.setState(aux);
+      this.setState({carregado: true})
+      this.setState({resultado: json});
     });
+  }
 
+  mudaPagina(nome){
+    this.props.navigation.navigate('Receita', {item: nome})
   }
 
   renderizarReceita(item){
-      return(
-          <View>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('Receita')}>
-                <View style={styles.telaPost}>
-                    <Image source={{uri: item.img}} style={styles.imagem}/>
-                    <View style={styles.areaTexto}>
-                        <Text style={styles.texto}>{item.titulo}</Text>
-                        <Text> Feita por: {item.autor}</Text>
-                    </View>
+
+     return(
+      <View>
+        <TouchableOpacity onPress={() => this.mudaPagina(item)}>
+            <View style={styles.telaPost}>
+                <Image source={{uri: item.url}} style={styles.imagem}/>
+                <View style={styles.areaTexto}>
+                    <Text style={styles.texto}>{item.title}</Text>
+                    <Text> Avaliação: {item.nota}</Text>
                 </View>
-                <View style={{borderTopWidth: 1}}></View>
-            </TouchableOpacity>
-          </View>
-      );
+            </View>
+            <View style={{borderTopWidth: 1}}></View>
+        </TouchableOpacity>
+    </View>
+     );
   }
   
   
   render() {
-    return (
-      <View style={{ paddingTop: 25, paddingLeft: 20, paddingRight: 15}}>
-          <FlatList data={this.state.resultado} renderItem={({item}) => this.renderizarReceita(item)}/>
-      </View>
-    );
+    if (this.state.carregado == false){
+      return(
+        <View style={styles.telaCarregando}>
+          <Text>Carregando ...</Text>
+        </View>
+      );
+    }else{
+      return (
+        <View style={{ paddingTop: 25, paddingLeft: 20, paddingRight: 15}}>
+            <FlatList data={this.state.resultado} renderItem={({item}) => this.renderizarReceita(item)} keyExtrator={(index)=> index.toString()}/>
+        </View>
+      );
+    }
   }
 }
 
@@ -94,5 +103,10 @@ const styles = StyleSheet.create({
       paddingLeft: 10,
       textAlign: 'center'
 
+  },
+  telaCarregando:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

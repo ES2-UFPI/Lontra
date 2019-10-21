@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Button, Icon, TextInput } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
+console.disableYellowBox = true;
 
 export default class telaInicial extends Component {
   static navigationOptions = {
@@ -38,11 +40,24 @@ export default class telaInicial extends Component {
     }
     this.setState({ ingredientes: lista })
 
-    alert(lista)
+    /*
 
+    axios.post('user/',{
+      Ingredientes: lista
+    })
+    .then( (response) => {
+      this.props.navigation.navigate('ReceitasBuscadas');
+      console.log(response);
+    })
+    .catch(function (error){
+      console.log(error);
+    });
+
+    */
+
+    alert(lista)
     this.props.navigation.navigate('ReceitasBuscadas');
 
-    //Aqui eu tenho que enviar a lista pra API
   }
   render() {
     return (
@@ -56,7 +71,7 @@ export default class telaInicial extends Component {
               data={this.state.ingredientes} 
               renderItem={({ item, index }) => (
                 <View style={styles.areaInput} key={index.toString()}>
-                  <TextInput placeholder='Ingrediente' underlineColorAndroid='blue' value={item} style={styles.input} key={index.toString()}
+                  <TextInput placeholder='Ingrediente' underlineColorAndroid='#ff4500' value={item} style={styles.input} key={index.toString()}
                     onChangeText={TextInputValue => {
                       let lista = this.state.ingredientes;
                       lista[index] = TextInputValue;
@@ -129,7 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   container_central: {
-    backgroundColor: 'blue',
+    backgroundColor: '#ff4500',
     width: 150,
     height: 50,
     padding: 5,
