@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, ScrollView, FlatList } from 'react-native';
 
+
 export default class Receita extends Component {
-    static navigationOptions = {
-        title: 'Receita',
-    };
+    static navigationOptions = ({navigation}) => ({
+        title: 'Receita'
+    });
 
     constructor(props) {
         super(props);
 
-        this.state = { receita: {nome: 'SALADA DE FRUTAS MARAVILHOSA', nota: 4, imagens: ['https://img.itdg.com.br/tdg/images/recipes/000/001/470/76954/76954_original.jpg?mode=crop&width=710&height=400', 'https://img.itdg.com.br/tdg/images/recipes/000/001/470/131194/131194_original.jpg?mode=crop&width=710&height=400'], tempoPreparo: '15 minutos', rendimento: '8 porções', ingredientes: ['bananas', 'maçãs', 'mamão médio', 'laranjas', 'melão', 'outras frutas a gosto', 'leite condensado'], modoPreparo: ['Picar todas as frutas, acrescentar meio copo de água mineral, e a lata de leite condensado. Fica uma sobremesa maravilhosa e super fácil de fazer, ideal para ser servida após o churrasco.']} };
+        this.state = { receita: {nome: 'SALADA DE FRUTAS MARAVILHOSA', nota: 4, imagens: ['https://img.itdg.com.br/tdg/images/recipes/000/001/470/76954/76954_original.jpg?mode=crop&width=710&height=400', 'https://img.itdg.com.br/tdg/images/recipes/000/001/470/131194/131194_original.jpg?mode=crop&width=710&height=400'], tempoPreparo: '15 minutos', rendimento: '8 porções', ingredientes: ['ingrediente 1', 'ingrediente 2', 'ingrediente 3'], modoPreparo: ['Passos ...']}    
+    };
+
     }
 
     renderItem(item, index) {
@@ -22,22 +25,25 @@ export default class Receita extends Component {
     }
 
     render() {
+
+        const params = this.props.navigation.state.params;
+
         return (
             <ScrollView>
                 <View style={ styles.container }>
-                    <Image style={ styles.imagem } source={{ uri: this.state.receita.imagens[0] }}/>
+                    <Image style={ styles.imagem } source={{ uri: params.item.url }}/>
                     
-                    <Text style={ styles.titulo }>{ this.state.receita.nome }</Text>
+                    <Text style={ styles.titulo }>{ params.item.title }</Text>
                     
                     <View style={ styles.detalhes }>
                         <View style={ styles.detalhe }>
                             <Text style={ styles.descricao }>Nota:</Text>
-                            <Text style={ styles.descricao }>{ this.state.receita.nota }</Text>
+                            <Text style={ styles.descricao }>{ params.item.nota }</Text>
                         </View>
                         <View style={ styles.separador }/>
                         <View style={ styles.detalhe }>
                             <Text style={ styles.descricao }>Tempo de Preparo:</Text>
-                            <Text style={ styles.descricao }>{ this.state.receita.tempoPreparo }</Text>
+                            <Text style={ styles.descricao }>{ params.item.seconds } s</Text>
                         </View>
                         <View style={ styles.separador }/>
                         <View style={ styles.detalhe }>
@@ -47,7 +53,9 @@ export default class Receita extends Component {
                     </View>
                     
                     <Text style={[ styles.detalhes, {marginTop: 8} ]}>Ingredientes:</Text>
-                    { this.state.receita.ingredientes.map((ingrediente, index) => {
+                    { 
+                        
+                        this.state.receita.ingredientes.map((ingrediente, index) => {
                         return this.renderItem(ingrediente, index);
                     }) }
 
@@ -55,6 +63,7 @@ export default class Receita extends Component {
                     { this.state.receita.modoPreparo.map((modo, index) => {
                         return this.renderItem(modo, index);
                     }) }
+    
                 </View>
             </ScrollView>
         );
@@ -69,19 +78,18 @@ const styles = StyleSheet.create({
     },
     imagem: {
         height: 203,
-        resizeMode: 'contain',
-        borderRadius: 6
+        resizeMode: 'contain'
     },
     titulo: {
         fontSize: 20,
-        color: '#ff6347', 
+        color: 'orange', 
         marginVertical: 8,
         fontWeight: 'bold'
     },
     detalhes: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        backgroundColor: '#ff6347',
+        backgroundColor: 'orange',
         padding: 8,
         borderRadius: 8,
         fontSize: 18,

@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Button, Icon, Tex
 import { FlatList } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
+console.disableYellowBox = true;
 
 export default class telaInicial extends Component {
   static navigationOptions = {
@@ -39,6 +40,8 @@ export default class telaInicial extends Component {
     }
     this.setState({ ingredientes: lista })
 
+    /*
+
     axios.post('user/',{
       Ingredientes: lista
     })
@@ -50,7 +53,10 @@ export default class telaInicial extends Component {
       console.log(error);
     });
 
-    //alert(lista)
+    */
+
+    alert(lista)
+    this.props.navigation.navigate('ReceitasBuscadas');
 
   }
   render() {
