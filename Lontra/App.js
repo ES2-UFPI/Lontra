@@ -10,6 +10,7 @@ import Receita from './src/Receita';
 import ReceitasBuscadas from './src/ReceitasBuscadas';
 import telaInicial from './src/telaInicial';
 import Pesquisa from './src/Pesquisa';
+import AvaliarReceita from './src/AvaliarReceita';
 
 const stackNavigation = createStackNavigator(
 	{
@@ -28,6 +29,10 @@ const stackNavigation = createStackNavigator(
 		Receita: {
 			screen: Receita,
 			title: 'Receita'
+		},
+		AvaliarReceita:{
+			screen: AvaliarReceita,
+			title: 'Avaliar Receita'
 		},
 	},
 	{
@@ -54,6 +59,10 @@ const stackNavigation2 = createStackNavigator(
 		Receita: {
 			screen: Receita,
 			title: 'Receita'
+		},
+		AvaliarReceita:{
+			screen: AvaliarReceita,
+			title: 'Avaliar Receita'
 		},
 	},
 	{

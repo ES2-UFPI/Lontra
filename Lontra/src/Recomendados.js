@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image} from 'react-native';
 
 export default class Recomendados extends Component {
 
@@ -53,11 +53,13 @@ export default class Recomendados extends Component {
 
   render(){
     return (
+      <View>
       <View style={styles.telaCompleta}>
         <View style={styles.areaTexto1}>
           <Text style={styles.texto1}>Você também pode gostar dessas receitas:</Text>
         </View>
-        <View style={{ paddingTop: 25, paddingLeft: 20, paddingRight: 15}}>
+        </View>
+        <View style={{ paddingTop: 80, paddingLeft: 20, paddingRight: 15}}>
             <FlatList data={this.state.resultado} renderItem={({item}) => this.renderizarReceita(item)} keyExtrator={(index)=> index.toString()}/>
         </View>
       </View>

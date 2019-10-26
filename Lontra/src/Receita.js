@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Image, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 
 export default class Receita extends Component {
@@ -11,8 +11,17 @@ export default class Receita extends Component {
         super(props);
 
         this.state = { receita: {nome: 'SALADA DE FRUTAS MARAVILHOSA', nota: 4, imagens: ['https://img.itdg.com.br/tdg/images/recipes/000/001/470/76954/76954_original.jpg?mode=crop&width=710&height=400', 'https://img.itdg.com.br/tdg/images/recipes/000/001/470/131194/131194_original.jpg?mode=crop&width=710&height=400'], tempoPreparo: '15 minutos', rendimento: '8 porções', ingredientes: ['ingrediente 1', 'ingrediente 2', 'ingrediente 3'], modoPreparo: ['Passos ...']}    
+        
+
+        
     };
 
+    this.mudaPagina = this.mudaPagina.bind(this)
+
+    }
+
+    mudaPagina(nome){
+        this.props.navigation.navigate('AvaliarReceita', {item: nome})
     }
 
     renderItem(item, index) {
@@ -63,6 +72,12 @@ export default class Receita extends Component {
                     { this.state.receita.modoPreparo.map((modo, index) => {
                         return this.renderItem(modo, index);
                     }) }
+
+                    <View>
+                        <TouchableOpacity onPress={() => this.mudaPagina(params.item)}>
+                            <Text style={[ styles.detalhes, {marginTop: 8} ]}>Avalie essa Receita Aqui</Text>
+                        </TouchableOpacity>
+                    </View>
     
                 </View>
             </ScrollView>
