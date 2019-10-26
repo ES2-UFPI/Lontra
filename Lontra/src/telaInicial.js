@@ -1,65 +1,112 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Button} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
+console.disableYellowBox = true;
 
 
 export default class telaInicial extends Component {
-    static navigationOptions = {
-        title: 'Lontra',
+  static navigationOptions = {
+    title: 'Resultados'
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+        resultado:[],
+        carregado: false
+      
     };
 
-    constructor(props){
-      super(props);
+    this.renderizarReceita = this.renderizarReceita.bind(this)
+    this.mudaPagina = this.mudaPagina.bind(this)
 
-      this.state = {
 
-      };
+    fetch('http://10.0.0.107:8000/receitas/?format=json')
+    .then((r) => r.json())
+    .then((json) => {
+      this.setState({carregado: true})
+      this.setState({resultado: json});
+    });
+  }
 
-      //this.mudaPagina = this.mudaPagina.bind(this)
-     
-    }
+  mudaPagina(nome){
+    this.props.navigation.navigate('Receita', {item: nome})
+  }
 
-    mudaPagina(){
-      this.props.navigation.navigate('Pesquisa');
-    }
+  renderizarReceita(item){
 
-  render(){
-    return (
-      <View style={styles.tela}>
-        <TouchableOpacity style={styles.botao} onPress={() => this.props.navigation.navigate('Pesquisa')}>
-          <View style={styles.container}>
-            <View style={styles.container_central}>
-              <Text style={styles.texto}>Pesquisar Receitas</Text>
+     return(
+      <View>
+        <TouchableOpacity onPress={() => this.mudaPagina(item)}>
+            <View style={styles.telaPost}>
+                <Image source={{uri: item.url}} style={styles.imagem}/>
+                <View style={styles.areaTexto}>
+                    <Text style={styles.texto}>{item.title}</Text>
+                    <Text> Avaliação: {item.nota}</Text>
+                </View>
             </View>
-          </View>
+            <View style={{borderTopWidth: 1}}></View>
         </TouchableOpacity>
-      </View>
-    );
+    </View>
+     );
+  }
+  
+  
+  render() {
+    if (this.state.carregado == false){
+      return(
+        <View style={styles.telaCarregando}>
+          <Text>Carregando ...</Text>
+        </View>
+      );
+    }else{
+      return (
+        <View style={{ paddingTop: 25, paddingLeft: 20, paddingRight: 15}}>
+            <FlatList data={this.state.resultado} renderItem={({item}) => this.renderizarReceita(item)} keyExtrator={(index)=> index.toString()}/>
+        </View>
+      );
+    }
   }
 }
 
 const styles = StyleSheet.create({
-  tela:{
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  container_central:{
-    backgroundColor: 'blue',
-    width: 140,
-    height: 90,
-    alignItems: "center",
-    justifyContent:  'center',
-    borderRadius: 10
-  },
-  texto:{
-    color: 'white',
+  texto: {
     textAlign: 'center',
-    fontSize: 24,
-    fontWeight: 'bold',
+    color: '#333333',
+    marginBottom: 5,
+    marginTop: 5,
+    fontSize: 18
+  },
+  areaPost:{
+    shadowColor: '#000000',
+    backgroundColor: '#FFFFFF',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 1,
+    shadowRadius: 4,
+    borderRadius: 6,
+    elevation: 4
+  },
+  imagem:{
+      width: 120,
+      height: 100,
+      borderRadius: 10
+  },
+  telaPost:{
+      flexDirection: 'row',
+      paddingTop: 7,
+      paddingBottom: 7,
+  },
+  areaTexto:{
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      paddingLeft: 10,
+      textAlign: 'center'
+
+  },
+  telaCarregando:{
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });

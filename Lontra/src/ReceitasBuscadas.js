@@ -21,7 +21,7 @@ export default class ReceitasBuscadas extends Component {
     this.mudaPagina = this.mudaPagina.bind(this)
 
 
-    fetch('http://10.13.65.121:8000/receitas/?format=json')
+    fetch('http://10.0.0.107:8000/receitas/?format=json')
     .then((r) => r.json())
     .then((json) => {
       this.setState({carregado: true})
@@ -30,6 +30,18 @@ export default class ReceitasBuscadas extends Component {
   }
 
   mudaPagina(nome){
+
+    /*
+    axios.post('user/',{
+      mandar a receita que o cara clicou
+    })
+    .then( (response) => {
+      console.log(response);
+    })
+    .catch(function (error){
+      console.log(error);
+    });
+    */
     this.props.navigation.navigate('Receita', {item: nome})
   }
 

@@ -20,7 +20,7 @@ export default class Recomendados extends Component {
     this.mudaPagina = this.mudaPagina.bind(this)
 
 
-    fetch('http://10.13.65.121:8000/receitas/?format=json')
+    fetch('http://10.0.0.107:8000/receitas/?format=json')
     .then((r) => r.json())
     .then((json) => {
       this.setState({carregado: true})
