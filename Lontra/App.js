@@ -41,14 +41,53 @@ const stackNavigation = createStackNavigator(
 );
 
 
+const stackNavigation2 = createStackNavigator(
+	{
+		Recomendados:{
+			screen: Recomendados,
+			title: 'Recomendados'
+		},
+		ReceitasBuscadas:{
+			screen: ReceitasBuscadas,
+			title: 'ReceitasBuscadas'
+		},
+		Receita: {
+			screen: Receita,
+			title: 'Receita'
+		},
+	},
+	{
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: 'orange',
+			},
+			headerTintColor: '#fff',
+		}
+	}
+
+);
 
 
 
 
 
 const TabNavigator = createBottomTabNavigator({
-  Recomendados: Recomendados,
-  PesquisarReceitas: stackNavigation,
+	Pesquisar: stackNavigation,
+  	Recomendados: stackNavigation2
+},{
+	tabBarOptions:{
+		activeTintColor: "#ff4500",      
+		inactiveTintColor: "#858585",  
+		style: {               
+		 paddingVertical: 10,        
+		 backgroundColor: "#fff",
+		 border: '#ffffff'  
+		},      
+		labelStyle: {        
+		 fontSize: 14,        
+		 lineHeight: 16,     
+		},
+	}
 });
 
 export default createAppContainer(TabNavigator);
