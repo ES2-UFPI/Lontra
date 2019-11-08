@@ -23,8 +23,8 @@ class CategoriaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ReceitaSerializer(serializers.ModelSerializer):
-    imagens = ImagemSerializer(read_only=False, many=True)
-    categorias = CategoriaSerializer(read_only=False, many=True)
+    # imagens = ImagemSerializer(read_only=False, many=True)
+    # categorias = CategoriaSerializer(read_only=False, many=True)
 
     class Meta:
         model = Receita

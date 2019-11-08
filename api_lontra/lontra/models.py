@@ -19,13 +19,14 @@ class Usuario(models.Model):
     token = models.CharField(max_length=255)
     criado_em = models.DateTimeField(auto_now_add=True)
     historico = models.OneToOneField(Historico, on_delete=models.CASCADE)
-
+    categoria = models.CharField(max_length=255)
     def __str__(self):
         return self.token
 
 class Receita(models.Model):
     nome = models.CharField(max_length=255)
-    imagens = models.ManyToManyField(Imagem)
+    # imagens = models.ManyToManyField(Imagem)
+
     tempo = models.CharField(max_length=255)
     nota = models.IntegerField(default=5)
     url = models.CharField(max_length=1023)
@@ -36,4 +37,4 @@ class Receita(models.Model):
     atualizado_em = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.title
+        return self.nome

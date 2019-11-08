@@ -6,20 +6,18 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 
-from .models import Receita, Usuario
-from .serializers import ReceitaSerializer, UsuarioSerializer, HistoricoListSerializer
+from .models import *
+from .serializers import ReceitaSerializer, UsuarioSerializer
 
 class UsuarioList(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
 
-class HistoricoList(generics.ListCreateAPIView):
-    queryset = Usuario.objects.all()
-    serializer_class = HistoricoListSerializer
-
 class ReceitaList(generics.ListCreateAPIView):
     queryset = Receita.objects.all()
     serializer_class = ReceitaSerializer
+    # filter_backends = [filters.SearchFilter]
+    # search_fields = ['nome', 'ingredientes']
     
     def get_queryset(self):        
         receitas = []

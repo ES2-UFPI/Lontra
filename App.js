@@ -60,11 +60,10 @@ export default class App extends Component {
 			return;
 		}
 
-		let token = await Notifications.getExpoPushTokenAsync();
-		await AsyncStorage.setItem('tokenNotificacao', token);
-
-		console.log(token);
-		await Api.enviarToken(token);
+		console.log("iheihihr")
+		let token = "13"//await Notifications.getExpoPushTokenAsync();
+		//await AsyncStorage.setItem('tokenNotificacao', token);
+		await Api.enviarToken(token).catch(error => console.log(error));
 	}
 
 	async componentWillMount() {
