@@ -1,12 +1,5 @@
 from django.db import models
 
-class Usuario(models.Model):
-    nome = models.CharField(max_length=200)
-    criado_em = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.nome
-
 class Imagem(models.Model):
     url = models.CharField(max_length=1023)
 
@@ -15,6 +8,14 @@ class Imagem(models.Model):
 
 class Categoria(models.Model):
     nome = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nome
+
+class Usuario(models.Model):
+    nome = models.CharField(max_length=200)
+    criado_em = models.DateTimeField(auto_now_add=True)
+    historico = models.ManyToManyField(Categoria)
 
     def __str__(self):
         return self.nome
