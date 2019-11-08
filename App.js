@@ -1,7 +1,11 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { AsyncStorage } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
+import axios from 'axios';
+import Api from './src/sevicos/Api';
 
 import Receita from './src/Receita';
 import ReceitasBuscadas from './src/ReceitasBuscadas';
@@ -39,31 +43,37 @@ const stackNavigation = createStackNavigator(
 
 const Navegacao = createAppContainer(stackNavigation);
 
-export default function App() {
-	return (
-		<Navegacao/>
-	);
-}
+export default class App extends Component {
+	async registerForPushNotificationsAsync() {
+		const { status: existingStatus } = await Permissions.getAsync(
+			Permissions.NOTIFICATIONS
+		);
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	container_central:{
-		backgroundColor: 'blue',
-		width: 120,
-		height: 70,
-		alignItems: "center",
-		justifyContent:  'center',
-		borderRadius: 10
-	},
-	texto:{
-		color: 'white',
-		textAlign: 'center',
-		fontSize: 30,
-		fontWeight: 'bold',
+		let finalStatus = existingStatus;
+
+		if (existingStatus !== 'granted') {
+			const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+			finalStatus = status;
+		}
+
+		if (finalStatus !== 'granted') {
+			return;
+		}
+
+		let token = await Notifications.getExpoPushTokenAsync();
+		await AsyncStorage.setItem('tokenNotificacao', token);
+
+		console.log(token);
+		await Api.enviarToken(token);
 	}
-});
+
+	async componentWillMount() {
+		await this.registerForPushNotificationsAsync();
+	}
+
+	render() {
+		return (
+			<Navegacao/>
+		);
+	}
+}

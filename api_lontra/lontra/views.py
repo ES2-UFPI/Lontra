@@ -10,7 +10,7 @@ from .models import Receita, Usuario
 from .serializers import ReceitaSerializer, UsuarioSerializer, HistoricoListSerializer
 
 class UsuarioList(generics.ListCreateAPIView):
-    queryset = User.objects.all()
+    queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
 
 class HistoricoList(generics.ListCreateAPIView):
@@ -20,8 +20,6 @@ class HistoricoList(generics.ListCreateAPIView):
 class ReceitaList(generics.ListCreateAPIView):
     queryset = Receita.objects.all()
     serializer_class = ReceitaSerializer
-    # filter_backends = [filters.SearchFilter]
-    # search_fields = ['nome', 'ingredientes']
     
     def get_queryset(self):        
         receitas = []

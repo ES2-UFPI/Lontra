@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Imagem, Categoria, Receita, Usuario
+from .models import Imagem, Categoria, Receita, Usuario, Historico
 
 class UsuarioSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = Usuario
         fields = '__all__'
         
 class ImagemSerializer(serializers.ModelSerializer):
@@ -14,8 +14,8 @@ class ImagemSerializer(serializers.ModelSerializer):
 
 class HistoricoListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
-        fields = ['historico']
+        model = Historico
+        fields = '__all__'
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:

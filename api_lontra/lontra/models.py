@@ -12,13 +12,16 @@ class Categoria(models.Model):
     def __str__(self):
         return self.nome
 
+class Historico(models.Model):
+    categoria = models.ManyToManyField(Categoria)
+
 class Usuario(models.Model):
-    nome = models.CharField(max_length=200)
+    token = models.CharField(max_length=255)
     criado_em = models.DateTimeField(auto_now_add=True)
-    historico = models.ManyToManyField(Categoria)
+    historico = models.OneToOneField(Historico, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.nome
+        return self.token
 
 class Receita(models.Model):
     nome = models.CharField(max_length=255)
