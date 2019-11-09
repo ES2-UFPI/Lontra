@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/ES2-UFPI/Lontra.svg?branch=gabriel%2321)](https://travis-ci.com/ES2-UFPI/Lontra)
+
 ## Lontra 0.1.0 - 21/10/2019                                                                                                                                                                                                                                                  
 ## NEW
 	* Os endpoints foram criados para consumir e consultar as receitas;
