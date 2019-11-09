@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { AsyncStorage } from 'react-native';
+import { Text, View, AsyncStorage } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+
 import { Notifications } from 'expo';
 import * as Permissions from 'expo-permissions';
-import axios from 'axios';
 import Api from './src/sevicos/Api';
 
+import Recomendados from './src/Recomendados';
 import Receita from './src/Receita';
 import ReceitasBuscadas from './src/ReceitasBuscadas';
 import telaInicial from './src/telaInicial';
 import Pesquisa from './src/Pesquisa';
+import AvaliarReceita from './src/AvaliarReceita';
 
 const stackNavigation = createStackNavigator(
 	{
@@ -30,6 +33,10 @@ const stackNavigation = createStackNavigator(
 			screen: Receita,
 			title: 'Receita'
 		},
+		AvaliarReceita:{
+			screen: AvaliarReceita,
+			title: 'Avaliar Receita'
+		},
 	},
 	{
 		defaultNavigationOptions: {
@@ -41,7 +48,61 @@ const stackNavigation = createStackNavigator(
 	}
 );
 
-const Navegacao = createAppContainer(stackNavigation);
+
+const stackNavigation2 = createStackNavigator(
+	{
+		Recomendados:{
+			screen: Recomendados,
+			title: 'Recomendados'
+		},
+		ReceitasBuscadas:{
+			screen: ReceitasBuscadas,
+			title: 'ReceitasBuscadas'
+		},
+		Receita: {
+			screen: Receita,
+			title: 'Receita'
+		},
+		AvaliarReceita:{
+			screen: AvaliarReceita,
+			title: 'Avaliar Receita'
+		},
+	},
+	{
+		defaultNavigationOptions: {
+			headerStyle: {
+				backgroundColor: 'orange',
+			},
+			headerTintColor: '#fff',
+		}
+	}
+
+);
+
+
+
+
+
+const TabNavigator = createBottomTabNavigator({
+	Pesquisar: stackNavigation,
+  	Recomendados: stackNavigation2
+},{
+	tabBarOptions:{
+		activeTintColor: "#ff4500",      
+		inactiveTintColor: "#858585",  
+		style: {               
+		 paddingVertical: 10,        
+		 backgroundColor: "#fff",
+		 border: '#ffffff'  
+		},      
+		labelStyle: {        
+		 fontSize: 14,        
+		 lineHeight: 16,     
+		},
+	}
+});
+
+const Navegacao = createAppContainer(TabNavigator);
 
 export default class App extends Component {
 	async registerForPushNotificationsAsync() {
@@ -61,8 +122,8 @@ export default class App extends Component {
 		}
 
 		console.log("iheihihr")
-		let token = "13"//await Notifications.getExpoPushTokenAsync();
-		//await AsyncStorage.setItem('tokenNotificacao', token);
+		let token = "10"
+		await AsyncStorage.setItem('tokenNotificacao', token);
 		await Api.enviarToken(token).catch(error => console.log(error));
 	}
 
@@ -76,3 +137,6 @@ export default class App extends Component {
 		);
 	}
 }
+
+
+//<Navegacao/>

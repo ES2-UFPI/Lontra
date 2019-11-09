@@ -7,11 +7,15 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 
 from .models import *
-from .serializers import ReceitaSerializer, UsuarioSerializer
+from .serializers import *
 
 class UsuarioList(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
+
+class HistoricoList(generics.ListCreateAPIView):
+    queryset = Historico.objects.all()
+    serializer_class = HistoricoListSerializer
 
 class ReceitaList(generics.ListCreateAPIView):
     queryset = Receita.objects.all()

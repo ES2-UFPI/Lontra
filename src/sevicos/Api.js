@@ -1,15 +1,16 @@
 import axios from 'axios';
 
 const api = axios.create({ 
-    baseURL: 'http://10.13.66.119:8000' 
+    baseURL: 'http://10.0.0.106:8000' 
 });
 
 api.enviarToken = async (token) => {
+    alert(token)
     await api.post(
         '/usuarios/',
         {
-            'token': "13",
-            'historico': 2
+            'token': '10',
+            'historico': 11
         }
     );
 }

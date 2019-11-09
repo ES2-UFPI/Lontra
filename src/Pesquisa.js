@@ -41,7 +41,6 @@ export default class telaInicial extends Component {
     this.setState({ ingredientes: lista })
 
     /*
-
     axios.post('user/',{
       Ingredientes: lista
     })
@@ -52,7 +51,6 @@ export default class telaInicial extends Component {
     .catch(function (error){
       console.log(error);
     });
-
     */
 
     alert(lista)
