@@ -39,7 +39,7 @@ class ReceitaList(generics.ListCreateAPIView):
 
 
 class AlteraUsuario(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Usuario.objects.get(token="12")
+    queryset = Usuario.objects.all()
     serializer_class = UsuarioSerializer
     
     def put(self, request, *args, **kwargs):
