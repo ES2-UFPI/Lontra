@@ -10,7 +10,9 @@ export default class Receita extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { receita: {nome: 'SALADA DE FRUTAS MARAVILHOSA', nota: 4, imagens: ['https://img.itdg.com.br/tdg/images/recipes/000/001/470/76954/76954_original.jpg?mode=crop&width=710&height=400', 'https://img.itdg.com.br/tdg/images/recipes/000/001/470/131194/131194_original.jpg?mode=crop&width=710&height=400'], tempoPreparo: '15 minutos', rendimento: '8 porções', ingredientes: ['ingrediente 1', 'ingrediente 2', 'ingrediente 3'], modoPreparo: ['Passos ...']}    
+        this.state = { receita: {nome: 'SALADA DE FRUTAS MARAVILHOSA', nota: 4, imagens: ['https://img.itdg.com.br/tdg/images/recipes/000/001/470/76954/76954_original.jpg?mode=crop&width=710&height=400', 'https://img.itdg.com.br/tdg/images/recipes/000/001/470/131194/131194_original.jpg?mode=crop&width=710&height=400'], tempoPreparo: '15 minutos', rendimento: '8 porções', ingredientes: ['ingrediente 1', 'ingrediente 2', 'ingrediente 3'], modoPreparo: ['Passos ...'],
+                        ingredientesReceita: this.props.navigation.state.params.item.ingredientes.split(';')
+    }    
         
 
         
@@ -42,7 +44,7 @@ export default class Receita extends Component {
                 <View style={ styles.container }>
                     <Image style={ styles.imagem } source={{ uri: params.item.url }}/>
                     
-                    <Text style={ styles.titulo }>{ params.item.title }</Text>
+                    <Text style={ styles.titulo }>{ params.item.nome }</Text>
                     
                     <View style={ styles.detalhes }>
                         <View style={ styles.detalhe }>
@@ -52,7 +54,7 @@ export default class Receita extends Component {
                         <View style={ styles.separador }/>
                         <View style={ styles.detalhe }>
                             <Text style={ styles.descricao }>Tempo de Preparo:</Text>
-                            <Text style={ styles.descricao }>{ params.item.seconds } s</Text>
+                            <Text style={ styles.descricao }>{ params.item.tempo } minutos</Text>
                         </View>
                         <View style={ styles.separador }/>
                         <View style={ styles.detalhe }>
@@ -62,20 +64,22 @@ export default class Receita extends Component {
                     </View>
                     
                     <Text style={[ styles.detalhes, {marginTop: 8} ]}>Ingredientes:</Text>
-                    { 
-                        
-                        this.state.receita.ingredientes.map((ingrediente, index) => {
-                        return this.renderItem(ingrediente, index);
-                    }) }
+
+                    <Text style={styles.item}>
+                        {params.item.ingredientes}
+                    </Text>
 
                     <Text style={[ styles.detalhes, {marginTop: 8} ]}>Modo de Preparo:</Text>
-                    { this.state.receita.modoPreparo.map((modo, index) => {
-                        return this.renderItem(modo, index);
-                    }) }
+
+                    <Text style={styles.item}>
+                        {params.item.preparo}
+                    </Text>
+
+        
 
                     <View>
                         <TouchableOpacity onPress={() => this.mudaPagina(params.item)}>
-                            <Text style={[ styles.detalhes, {marginTop: 8} ]}>Avalie essa Receita Aqui</Text>
+                            <Text style={[ styles.detalhes2, {marginTop: 8} ]}>Avalie essa Receita Aqui</Text>
                         </TouchableOpacity>
                     </View>
     
@@ -105,6 +109,15 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: 'orange',
+        padding: 8,
+        borderRadius: 8,
+        fontSize: 18,
+        color: '#ffffff'
+    },
+    detalhes2: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: '#ff4500',
         padding: 8,
         borderRadius: 8,
         fontSize: 18,

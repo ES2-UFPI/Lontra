@@ -13,15 +13,15 @@ export default class ReceitasBuscadas extends Component {
 
     this.state = {
         resultado:[],
-        carregado: false
+        carregado: false,
       
     };
 
     this.renderizarReceita = this.renderizarReceita.bind(this)
     this.mudaPagina = this.mudaPagina.bind(this)
 
-
-    fetch('http://10.0.0.106:8000/receitas/?ingredientes')
+    console.log('http://10.0.0.106:8000/receitas/?ingredientes='+this.props.navigation.state.params.parametros)
+    fetch('http://10.0.0.106:8000/receitas/?ingredientes='+this.props.navigation.state.params.parametros)
     .then((r) => r.json())
     .then((json) => {
       this.setState({carregado: true})
@@ -53,7 +53,7 @@ export default class ReceitasBuscadas extends Component {
             <View style={styles.telaPost}>
                 <Image source={{uri: item.url}} style={styles.imagem}/>
                 <View style={styles.areaTexto}>
-                    <Text style={styles.texto}>{item.title}</Text>
+                    <Text style={styles.texto}>{item.nome}</Text>
                     <Text> Avaliação: {item.nota}</Text>
                 </View>
             </View>
@@ -62,6 +62,7 @@ export default class ReceitasBuscadas extends Component {
     </View>
      );
   }
+  
   
   
   render() {

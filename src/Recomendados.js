@@ -40,7 +40,7 @@ export default class Recomendados extends Component {
             <View style={styles.telaPost}>
                 <Image source={{uri: item.url}} style={styles.imagem}/>
                 <View style={styles.areaTexto}>
-                    <Text style={styles.texto}>{item.title}</Text>
+                    <Text style={styles.texto}>{item.nome}</Text>
                     <Text> Avaliação: {item.nota}</Text>
                 </View>
             </View>

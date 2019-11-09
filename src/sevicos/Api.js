@@ -5,7 +5,6 @@ const api = axios.create({
 });
 
 api.enviarToken = async (token) => {
-    alert(token)
     await api.post(
         '/usuarios/',
         {
@@ -27,6 +26,7 @@ api.receitas = async (token) => {
 }
 
 api.buscarReceitas = async (token, parametros) => {
+    console.log(api.baseURL + `/receitas/?ingredientes=${parametros}`)
     api.get(
         `/receitas/?ingredientes=${parametros}`,
         {

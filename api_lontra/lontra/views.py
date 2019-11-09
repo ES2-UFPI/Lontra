@@ -27,16 +27,21 @@ class ReceitaList(generics.ListCreateAPIView):
         receitas = []
         ingredientes_buscados = self.request.GET['ingredientes'].split(';')
 
-        for receita in Receita.objects.all():
-            ingredientes_receita = receita.ingredientes.split(';')
-            flag = False
+        print(len(ingredientes_buscados))
 
-            for ingrediente in ingredientes_buscados:
-                for i in ingredientes_receita:
-                    if ingrediente in i:
-                        flag = True
+        if ingredientes_buscados[0] == "":
+            print('oi')
+            return Receita.objects.all()
+        else:
             
-            if flag == True:
-                receitas.append(receita)
-        
-        return receitas
+            for receita in Receita.objects.all():
+                ingredientes_receita = receita.ingredientes.split(';')
+                aux = len(ingredientes_buscados)
+                cont = 0
+                for ingrediente in ingredientes_buscados:
+                    if ingrediente in ingredientes_receita:
+                        cont = cont + 1
+                if cont == aux:
+                    receitas.append(receita)
+            
+            return receitas

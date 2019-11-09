@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, AsyncStorage} from 'react-native';
 import { Icon } from 'react-native-elements';
 import axios from 'axios';
 console.disableYellowBox = true;
@@ -32,6 +32,38 @@ export default class AvaliarReceita extends Component {
           alert('Faça a Avaliação Primeiro')
       }else{
           //mandar para a api
+
+          /*
+          const receitas_avaliadas = AsyncStorage.getItem('receitasAvaliadas');
+          if(typeof receitas_avaliadas[0] === "undefined"){
+            console.log('criando ...')
+            var receitas = [];
+            receitas.push(this.props.navigation.state.params.item.id);
+
+            AsyncStorage.setItem('receitasAvaliadas', receitas);
+            console.log(receitas)
+            console.log(receitas[0])
+          }else{
+            var flag = new Boolean(true);
+            console.log('já criou o var')
+            console.log(receitas_avaliadas)
+            for(i=0;i<receitas_avaliadas.lenght;i++){
+                console.log(receitas_avaliadas[i])
+                if(receitas_avaliadas[i] == this.props.navigation.state.params.item.id){
+                    flag = false;
+                }
+            }
+            if(flag){
+                receitas_avaliadas.push(this.props.navigation.state.params.item.id)
+                AsyncStorage.setItem('receitasAvaliadas', receitas_avaliadas);
+                alert('Avaliação Feita !!')
+            }else{
+                alert('Receita já avaliada !!')
+
+            }
+
+          }*/
+
       }
   }
 
@@ -139,7 +171,7 @@ export default class AvaliarReceita extends Component {
              </TouchableOpacity>
              </View>
          </View>
-         <Text style={styles.texto}>Nota: {this.state.nota}</Text>
+         <Text style={styles.texto}>Sua nota: {this.state.nota}</Text>
          <View style={{paddingTop: 17}}>
             <TouchableOpacity onPress= {this.enviarAvaliacao}>
                 <View style={styles.container}>
@@ -151,7 +183,8 @@ export default class AvaliarReceita extends Component {
          </View>
          <View style={{paddingTop: 17}}>
             <View style={styles.areaTexto1}>
-            <Text style={styles.texto1}>Veja as avaliações de outros usuários:</Text>
+            <Text style={styles.texto1}>Avaliação média dos usuários:</Text>
+            <Text style={styles.texto2}>{params.item.nota} Estrelas</Text>
             </View>
         </View>
 
@@ -210,4 +243,12 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         elevation: 4,
       },
+      texto2:{
+        textAlign: 'center',
+        color: '#333333',
+        marginBottom: 5,
+        marginTop: 5,
+        fontSize: 18,
+        fontWeight: 'bold'
+      }
 });
