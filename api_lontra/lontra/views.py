@@ -7,7 +7,7 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 
 from .models import *
-from .serializers import ReceitaSerializer, UsuarioSerializer
+from .serializers import *
 
 class UsuarioList(generics.ListCreateAPIView):
     queryset = Usuario.objects.all()
@@ -36,3 +36,11 @@ class ReceitaList(generics.ListCreateAPIView):
                 receitas.append(receita)
         
         return receitas
+
+
+class AlteraUsuario(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Usuario.objects.get(token="12")
+    serializer_class = UsuarioSerializer
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)

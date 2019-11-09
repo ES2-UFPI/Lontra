@@ -26,7 +26,6 @@ class Usuario(models.Model):
 class Receita(models.Model):
     nome = models.CharField(max_length=255)
     # imagens = models.ManyToManyField(Imagem)
-
     tempo = models.CharField(max_length=255)
     nota = models.IntegerField(default=5)
     url = models.CharField(max_length=1023)
