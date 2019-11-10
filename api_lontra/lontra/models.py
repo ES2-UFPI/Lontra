@@ -1,5 +1,4 @@
 from django.db import models
-from django import forms
 
 # Adicionando um comentário para ver se o git percebe a modificação
 
@@ -19,16 +18,3 @@ class Receita(models.Model):
 
     def __str__(self):
         return self.title
-    
-# class Usuario(models.Model):
-    
-#     class Meta:
-#         db_table = 'users'
-        
-#     nome = models.CharField(max_length=160)
-#     usuario = models.CharField(max_length=80)
-#     email = models.CharField(max_length=160)    
-#     senha = forms.CharField(('password'), max_length=128)
-    
-#     def __str__(self):
-#         return self.name

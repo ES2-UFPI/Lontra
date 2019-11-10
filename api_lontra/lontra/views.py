@@ -14,4 +14,3 @@ class UsuarioList(generics.ListCreateAPIView):
     queryset = User.objects.all()
     serializer_class = UsuarioSerializer
 
-# Create your views here.

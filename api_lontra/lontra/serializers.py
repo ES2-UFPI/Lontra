@@ -11,8 +11,8 @@ class ReceitaSerializer(serializers.ModelSerializer):
         
 class UsuarioSerializer(serializers.ModelSerializer):
     # snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Snippet.objects.all())
-    
+
     class Meta:
         
         model = User
-        fields = ['id','password','username','last_name','email']
+        fields = ['id','first_name','last_name','username','email','password']
