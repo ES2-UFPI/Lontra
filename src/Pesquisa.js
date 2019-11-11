@@ -4,6 +4,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
 console.disableYellowBox = true;
+import Api from './sevicos/Api';
 
 export default class telaInicial extends Component {
   static navigationOptions = {
@@ -15,6 +16,7 @@ export default class telaInicial extends Component {
 
     this.state = {
       ingredientes: ['', '', '', ''],
+      res: []
     };
 
     this.alerta = this.alerta.bind(this)
@@ -40,10 +42,20 @@ export default class telaInicial extends Component {
     }
     this.setState({ ingredientes: lista })
 
-    /*
+    var url_parametros = '';
+    for(var i=0; i<lista.length; i++){
+      if(i == lista.length - 1){
+        url_parametros = url_parametros + lista[i]
+      }else{
+        url_parametros = url_parametros + lista[i] + '%3B'
+      }
+    }
 
+    //res = Api.buscarReceitas('10', url_parametros).catch(error => console.log(error));
+    //console.log(res)
+    /*
     axios.post('user/',{
-      Ingredientes: lista
+      res: lista
     })
     .then( (response) => {
       this.props.navigation.navigate('ReceitasBuscadas');
@@ -51,12 +63,10 @@ export default class telaInicial extends Component {
     })
     .catch(function (error){
       console.log(error);
-    });
+    });*/
 
-    */
-
-    alert(lista)
-    this.props.navigation.navigate('ReceitasBuscadas');
+    alert(url_parametros)
+    this.props.navigation.navigate('ReceitasBuscadas', {parametros: url_parametros});
 
   }
   render() {

@@ -12,7 +12,10 @@ web-report/
 package-lock.json
 yarn.lock
 __pycache__/
-api_lontra/lontra/__pycache__/
-api_lontra/lontra/migrations/__pycache__/
-api_lontra/lontra_api/__pycache__/
-api_lontra/db.sqlite3
+../api_lontra/lontra/__pycache__/
+../api_lontra/lontra/migrations/__pycache__/
+../api_lontra/lontra_api/__pycache__/
+
+env/
+myvenv/
+vscode/
