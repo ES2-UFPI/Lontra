@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
-console.disableYellowBox = true;
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image} from 'react-native';
 
+export default class Recomendados extends Component {
 
-export default class ReceitasBuscadas extends Component {
   static navigationOptions = {
-    title: 'Resultados'
+    title: 'Recomendados'
   };
 
   constructor(props) {
@@ -13,15 +12,15 @@ export default class ReceitasBuscadas extends Component {
 
     this.state = {
         resultado:[],
-        carregado: false,
+        carregado: false
       
     };
 
     this.renderizarReceita = this.renderizarReceita.bind(this)
     this.mudaPagina = this.mudaPagina.bind(this)
 
-    console.log('http://10.0.0.106:8000/receitas/?ingredientes='+this.props.navigation.state.params.parametros)
-    fetch('http://10.0.0.106:8000/receitas/?ingredientes='+this.props.navigation.state.params.parametros)
+
+    fetch('http://10.0.0.106:8000/receitas/?ingredientes')
     .then((r) => r.json())
     .then((json) => {
       this.setState({carregado: true})
@@ -30,18 +29,6 @@ export default class ReceitasBuscadas extends Component {
   }
 
   mudaPagina(nome){
-
-    /*
-    axios.post('user/',{
-      mandar a receita que o cara clicou
-    })
-    .then( (response) => {
-      console.log(response);
-    })
-    .catch(function (error){
-      console.log(error);
-    });
-    */
     this.props.navigation.navigate('Receita', {item: nome})
   }
 
@@ -62,27 +49,49 @@ export default class ReceitasBuscadas extends Component {
     </View>
      );
   }
-  
-  
-  
-  render() {
-    if (this.state.carregado == false){
-      return(
-        <View style={styles.telaCarregando}>
-          <Text>Carregando ...</Text>
+
+
+  render(){
+    return (
+      <View>
+      <View style={styles.telaCompleta}>
+        <View style={styles.areaTexto1}>
+          <Text style={styles.texto1}>Você também pode gostar dessas receitas:</Text>
         </View>
-      );
-    }else{
-      return (
-        <View style={{ paddingTop: 25, paddingLeft: 20, paddingRight: 15}}>
+        </View>
+        <View style={{ paddingTop: 80, paddingLeft: 20, paddingRight: 15}}>
             <FlatList data={this.state.resultado} renderItem={({item}) => this.renderizarReceita(item)} keyExtrator={(index)=> index.toString()}/>
         </View>
-      );
-    }
+      </View>
+    );
   }
 }
 
 const styles = StyleSheet.create({
+  telaCompleta:{
+    flex: 1,
+    alignItems: "center",
+    paddingTop: 10
+  },
+  texto1:{
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+    marginTop: 5,
+    fontSize: 18
+  },
+  areaTexto1:{
+    height: 70,
+    width: 300,
+    borderRadius: 5,
+    shadowColor: '#000000',
+    backgroundColor: '#FFFFFF',
+    shadowOffset: {width: 0, height: 1},
+    shadowOpacity: 1,
+    shadowRadius: 4,
+    borderRadius: 6,
+    elevation: 4
+  },
   texto: {
     textAlign: 'center',
     color: '#333333',
