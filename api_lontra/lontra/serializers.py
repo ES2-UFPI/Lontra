@@ -12,10 +12,10 @@ class ImagemSerializer(serializers.ModelSerializer):
         model = Imagem
         fields = '__all__'
 
-#class HistoricoListSerializer(serializers.ModelSerializer):
-    #class Meta:
-        #model = Historico
-        #fields = '__all__'
+class HistoricoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Usuario
+        fields = ['historico']
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:

@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-
 from rest_framework import generics, viewsets, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
-
 from .models import *
 from .serializers import *
 
@@ -37,10 +35,9 @@ class ReceitaList(generics.ListCreateAPIView):
         
         return receitas
 
-
-class AlteraUsuario(generics.RetrieveUpdateDestroyAPIView):
+class HistoricoUpdate(generics.UpdateAPIView):
     queryset = Usuario.objects.all()
-    serializer_class = UsuarioSerializer
-    
-    def put(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+    serializer_class = HistoricoSerializer
+
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
