@@ -38,3 +38,13 @@ class Receita(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Avaliacao(models.Model):
+
+    usuario = models.OneToOneField(Usuario,on_delete=models.CASCADE)
+    receita = models.OneToOneField(Receita,on_delete=models.CASCADE)
+    comentario = models.TextField(default="")
+    nota = models.IntegerField(default="5")
+
+    def __str__(self):
+        return (self.usuario, self.nome)

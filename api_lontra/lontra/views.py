@@ -17,6 +17,10 @@ class HistoricoList(generics.ListCreateAPIView):
     queryset = Historico.objects.all()
     serializer_class = HistoricoListSerializer
 
+class CategoriaList(generics.ListCreateAPIView):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+
 class ReceitaList(generics.ListCreateAPIView):
     queryset = Receita.objects.all()
     serializer_class = ReceitaSerializer
@@ -45,3 +49,7 @@ class ReceitaList(generics.ListCreateAPIView):
                     receitas.append(receita)
             
             return receitas
+
+class AvaliacaoList(generics.ListCreateAPIView):
+    queryset = Avaliacao.objects.all()
+    serializer_class = AvaliacaoSerializer
