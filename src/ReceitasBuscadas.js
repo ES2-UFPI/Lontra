@@ -20,8 +20,7 @@ export default class ReceitasBuscadas extends Component {
     this.renderizarReceita = this.renderizarReceita.bind(this)
     this.mudaPagina = this.mudaPagina.bind(this)
 
-    console.log('http://10.0.0.106:8000/receitas/?ingredientes='+this.props.navigation.state.params.parametros)
-    fetch('http://10.0.0.106:8000/receitas/?ingredientes='+this.props.navigation.state.params.parametros)
+    fetch('http://10.0.0.101:8000/receitas/?ingredientes='+this.props.navigation.state.params.parametros)
     .then((r) => r.json())
     .then((json) => {
       this.setState({carregado: true})

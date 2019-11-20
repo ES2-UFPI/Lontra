@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Button, Icon, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Picker, TextInput } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import axios from 'axios';
@@ -16,7 +16,9 @@ export default class telaInicial extends Component {
 
     this.state = {
       ingredientes: ['', '', '', ''],
-      res: []
+      res: [],
+      possiveis_busca: [{nome: 'ingredientes', valor: 1}, {nome: 'tempo de preparo', valor: 2}, {nome: 'receitas bem avaliadas', valor: 3}],
+      tipo_de_pesquisa: 1
     };
 
     this.alerta = this.alerta.bind(this)
@@ -73,6 +75,16 @@ export default class telaInicial extends Component {
     return (
       <View style={{ marginBottom: 53, paddingLeft: 10, paddingRight: 10 }}>
         <ScrollView>
+          <View style={styles.telaOpcaoBusca}>
+            <Text>Pesquisar por:</Text>
+            </View>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <Picker style={{width: 200, height: 50}} selectedValue={this.state.tipo_de_pesquisa} onValueChange={(itemValue, itemIndex) => this.setState({tipo_de_pesquisa: itemValue})}>
+              <Picker.Item key={1} value={1} label="Ingredientes"/>
+              <Picker.Item key={2} value={2} label="Menor Tempo de Preparo"/>
+              <Picker.Item key={3} value={3} label="Receitas Mais bem avaliadas"/>
+            </Picker>
+            </View>
           <View style={styles.tela}>
             <View style={styles.areaTexto}>
               <Text style={styles.texto}>Digite os Ingredientes:</Text>
@@ -167,5 +179,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 15,
     fontWeight: 'bold',
+  },
+  telaOpcaoBusca:{
+    width: 150,
+    height: 150,
+    padding: 5,
+    alignItems: "center",
+    justifyContent: 'flex-start'
   }
 });
