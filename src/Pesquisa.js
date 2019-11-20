@@ -8,7 +8,7 @@ import Api from './sevicos/Api';
 
 export default class telaInicial extends Component {
   static navigationOptions = {
-    title: 'Pesquisa'
+    title: 'Pesquisa por:'
   };
 
   constructor(props) {
@@ -75,11 +75,8 @@ export default class telaInicial extends Component {
     return (
       <View style={{ marginBottom: 53, paddingLeft: 10, paddingRight: 10 }}>
         <ScrollView>
-          <View style={styles.telaOpcaoBusca}>
-            <Text>Pesquisar por:</Text>
-            </View>
             <View style={{alignItems: 'center', justifyContent: 'center'}}>
-            <Picker style={{width: 200, height: 50}} selectedValue={this.state.tipo_de_pesquisa} onValueChange={(itemValue, itemIndex) => this.setState({tipo_de_pesquisa: itemValue})}>
+            <Picker style={{width: 300, height: 50}} selectedValue={this.state.tipo_de_pesquisa} onValueChange={(itemValue, itemIndex) => this.setState({tipo_de_pesquisa: itemValue})}>
               <Picker.Item key={1} value={1} label="Ingredientes"/>
               <Picker.Item key={2} value={2} label="Menor Tempo de Preparo"/>
               <Picker.Item key={3} value={3} label="Receitas Mais bem avaliadas"/>
@@ -182,7 +179,7 @@ const styles = StyleSheet.create({
   },
   telaOpcaoBusca:{
     width: 150,
-    height: 150,
+    height: 50,
     padding: 5,
     alignItems: "center",
     justifyContent: 'flex-start'
