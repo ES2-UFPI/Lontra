@@ -108,7 +108,7 @@ export default class PesquisaPorIngredientes extends Component {
             <TouchableOpacity style={styles.botao} onPress={this.alerta}>
               <View style={styles.container}>
                 <View style={styles.container_central}>
-                  <Text style={styles.textoBotao}>Salvar Ingredientes</Text>
+                  <Text style={styles.textoBotao}>Pesquisar Receitas</Text>
                 </View>
               </View>
             </TouchableOpacity>

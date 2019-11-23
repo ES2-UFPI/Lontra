@@ -15,6 +15,8 @@ import telaInicial from './src/telaInicial';
 import Pesquisa from './src/Pesquisa';
 import AvaliarReceita from './src/AvaliarReceita';
 import PesquisaPorIngredientes from './src/PesquisaPorIngredientes';
+import PesquisaPorTempo from './src/PesquisaPorTempo';
+import ReceitasRetornadas from './src/ReceitasRetornadas';
 
 const stackNavigation = createStackNavigator(
 	{
@@ -25,6 +27,10 @@ const stackNavigation = createStackNavigator(
 		PesquisaPorIngredientes:{
 			screen: PesquisaPorIngredientes,
 			title: 'PesquisaPorIngredientes'
+		},
+		PesquisaPorTempo:{
+			screen: PesquisaPorTempo,
+			title: 'PesquisaPorTempo'
 		},
 		ReceitasBuscadas:{
 			screen: ReceitasBuscadas,
@@ -37,6 +43,10 @@ const stackNavigation = createStackNavigator(
 		Receita: {
 			screen: Receita,
 			title: 'Receita'
+		},
+		ReceitasRetornadas:{
+			screen: ReceitasRetornadas,
+			title: 'Receitas Retornadas'
 		},
 		AvaliarReceita:{
 			screen: AvaliarReceita,
@@ -127,9 +137,9 @@ export default class App extends Component {
 		}
 
 		// Esse token era para ser o Token de Notificação
-		let token = "10"
-		await AsyncStorage.setItem('tokenNotificacao', token);
-		await Api.enviarToken(token).catch(error => console.log(error));
+		//let token = "10"
+		//await AsyncStorage.setItem('tokenNotificacao', token);
+		//await Api.enviarToken(token).catch(error => console.log(error));
 	}
 
 	async componentWillMount() {

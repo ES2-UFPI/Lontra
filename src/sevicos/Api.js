@@ -37,4 +37,8 @@ api.buscarReceitas = async (token, parametros) => {
     );
 }
 
+api.receberReceitasPeloTempo = async (tempo_especificado) => {
+    return await api.get('/tempo/?tempo=' + tempo_especificado);
+}
+
 export default api;

@@ -27,10 +27,8 @@ class ReceitaList(generics.ListCreateAPIView):
         receitas = []
         ingredientes_buscados = self.request.GET['ingredientes'].split(';')
 
-        print(len(ingredientes_buscados))
 
         if ingredientes_buscados[0] == "":
-            print('oi')
             return Receita.objects.all()
         else:
             
@@ -45,3 +43,22 @@ class ReceitaList(generics.ListCreateAPIView):
                     receitas.append(receita)
             
             return receitas
+
+class TempoDePreparoList(generics.ListCreateAPIView):
+    query = Receita.objects.all()
+    serializer_class = ReceitaSerializer
+
+    def get_queryset(self):
+        receitas = []
+
+        if(self.request.GET['tempo'] == ""):
+            print('Nada')
+        else:
+            tempo_recebido = int(self.request.GET['tempo'])
+            print(tempo_recebido)
+
+            for i in Receita.objects.all():
+                if int(i.tempo) <= tempo_recebido:
+                    receitas.append(i)
+            
+        return receitas
