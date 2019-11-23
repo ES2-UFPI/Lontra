@@ -14,12 +14,17 @@ import ReceitasBuscadas from './src/ReceitasBuscadas';
 import telaInicial from './src/telaInicial';
 import Pesquisa from './src/Pesquisa';
 import AvaliarReceita from './src/AvaliarReceita';
+import PesquisaPorIngredientes from './src/PesquisaPorIngredientes';
 
 const stackNavigation = createStackNavigator(
 	{
 		Pesquisa: {
 			screen: Pesquisa,
 			title: 'Pesquisa'
+		},
+		PesquisaPorIngredientes:{
+			screen: PesquisaPorIngredientes,
+			title: 'PesquisaPorIngredientes'
 		},
 		ReceitasBuscadas:{
 			screen: ReceitasBuscadas,
