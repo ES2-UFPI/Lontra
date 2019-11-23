@@ -51,21 +51,6 @@ export default class PesquisaPorIngredientes extends Component {
       }
     }
 
-    //res = Api.buscarReceitas('10', url_parametros).catch(error => console.log(error));
-    //console.log(res)
-    /*
-    axios.post('user/',{
-      res: lista
-    })
-    .then( (response) => {
-      this.props.navigation.navigate('ReceitasBuscadas');
-      console.log(response);
-    })
-    .catch(function (error){
-      console.log(error);
-    });*/
-
-    alert(url_parametros)
     this.props.navigation.navigate('ReceitasBuscadas', { parametros: url_parametros });
 
   }

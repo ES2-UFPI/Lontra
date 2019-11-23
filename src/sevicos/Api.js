@@ -37,6 +37,11 @@ api.buscarReceitas = async (token, parametros) => {
     );
 }
 
+api.buscarReceitasPorIngredientes = async (parametros) => {
+    //console.log(parametros)
+    return await api.get('/receitas/?ingredientes=' + parametros);
+}
+
 api.receberReceitasPeloTempo = async (tempo_especificado) => {
     return await api.get('/tempo/?tempo=' + tempo_especificado);
 }
