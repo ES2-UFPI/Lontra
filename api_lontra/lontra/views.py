@@ -35,9 +35,6 @@ class ReceitaList(generics.ListCreateAPIView):
         
         return receitas
 
-class HistoricoUpdate(generics.UpdateAPIView):
+class HistoricoUpdate(generics.RetrieveUpdateAPIView):
     queryset = Usuario.objects.all()
     serializer_class = HistoricoSerializer
-
-    def patch(self, request, *args, **kwargs):
-        return self.partial_update(request, *args, **kwargs)
