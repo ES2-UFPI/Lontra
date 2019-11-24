@@ -16,14 +16,14 @@ class Usuario(models.Model):
     token = models.CharField(max_length=255)
     criado_em = models.DateTimeField(auto_now_add=True)
     historico = models.ManyToManyField(Categoria)
-    categoria = models.CharField(max_length=255)
+    
     def __str__(self):
         return self.token
 
 class Receita(models.Model):
     nome = models.CharField(max_length=255)
     # imagens = models.ManyToManyField(Imagem)
-    tempo = models.CharField(max_length=255)
+    tempo = models.IntegerField()
     nota = models.IntegerField(default=5)
     url = models.CharField(max_length=1023)
     ingredientes = models.TextField(default="")
