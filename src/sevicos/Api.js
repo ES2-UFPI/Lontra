@@ -46,4 +46,8 @@ api.receberReceitasPeloTempo = async (tempo_especificado) => {
     return await api.get('/tempo/?tempo=' + tempo_especificado);
 }
 
+api.buscarReceitasPorIngredientesComFator = async (parametros, fator) => {
+    return await api.get('/receitas/?ingredientes=' + parametros + '&fator=' + fator);
+}
+
 export default api;

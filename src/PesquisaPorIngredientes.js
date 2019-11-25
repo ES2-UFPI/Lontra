@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Picker, TextInput } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Slider, TextInput } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
-import axios from 'axios';
 console.disableYellowBox = true;
-import Api from './sevicos/Api';
 
 export default class PesquisaPorIngredientes extends Component {
   static navigationOptions = {
@@ -17,6 +15,7 @@ export default class PesquisaPorIngredientes extends Component {
     this.state = {
       ingredientes: ['', '', '', ''],
       res: [],
+      fator_de_precisao: 0
     };
 
     this.alerta = this.alerta.bind(this)
@@ -51,17 +50,26 @@ export default class PesquisaPorIngredientes extends Component {
       }
     }
 
-    this.props.navigation.navigate('ReceitasBuscadas', { parametros: url_parametros });
+    this.props.navigation.navigate('ReceitasBuscadas', { parametros: url_parametros, fator: this.state.fator_de_precisao.toFixed(0) });
 
   }
   render() {
     return (
       <View style={{ marginBottom: 53, paddingLeft: 10, paddingRight: 10 }}>
         <ScrollView>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <Text style={styles.texto}>Fator de precisão na busca:</Text>
+          </View>
+          <Slider minimumValue={0} maximumValue={100} onValueChange={(valor) => this.setState({ fator_de_precisao: valor })}
+            value={this.fator_de_precisao} />
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
+            <Text>{this.state.fator_de_precisao.toFixed(0)} %</Text>
+          </View>
+          <View style={{height: 25}}></View>
+          <View style={styles.areaTexto}>
+            <Text style={styles.texto}>Digite os Ingredientes:</Text>
+          </View>
           <View style={styles.tela}>
-            <View style={styles.areaTexto}>
-              <Text style={styles.texto}>Digite os Ingredientes:</Text>
-            </View>
             <FlatList
               data={this.state.ingredientes}
               renderItem={({ item, index }) => (

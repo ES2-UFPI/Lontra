@@ -49,8 +49,8 @@ export default class ReceitasRetornadas extends Component {
  
         let tempo_especificado = this.props.navigation.state.params.tempo
         const receitas = await Api.receberReceitasPeloTempo(tempo_especificado).catch(error => console.log(error));
-        this.setState({ carregado: true })
         this.setState({ resultado: receitas.data})
+        this.setState({ carregado: true })
 
     }
 

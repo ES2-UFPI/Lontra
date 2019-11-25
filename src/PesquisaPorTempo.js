@@ -40,7 +40,7 @@ export default class PesquisaPorTempo extends Component {
                 <Slider minimumValue={15} maximumValue={180} onValueChange={(valor) => this.setState({ tempoSelecionado: valor })}
                     value={this.tempoSelecionado} />
 
-                {this.state.tempoSelecionado < 120 ? <Text style={styles.texto}> Até {this.state.tempoSelecionado.toFixed(0)} minutos</Text> :
+                {this.state.tempoSelecionado < 180 ? <Text style={styles.texto}> Até {this.state.tempoSelecionado.toFixed(0)} minutos</Text> :
                     <Text style={styles.texto}> Mais de {this.state.tempoSelecionado.toFixed(0)} minutos</Text>}
 
                 <View style={{ paddingTop: 15 }}>
