@@ -20,6 +20,10 @@ class HistoricoList(generics.ListCreateAPIView):
 class ReceitaList(generics.ListCreateAPIView):
     queryset = Receita.objects.all()
     serializer_class = ReceitaSerializer
+
+class BuscaReceitaList(generics.ListCreateAPIView):
+    queryset = Receita.objects.all()
+    serializer_class = ReceitaSerializer
     # filter_backends = [filters.SearchFilter]
     # search_fields = ['nome', 'ingredientes']
     
