@@ -30,9 +30,8 @@ export default class Pesquisa extends Component {
     }else{
       if(id == 1){
         this.props.navigation.navigate('PesquisaPorTempo')
-
       }else{
-
+        this.props.navigation.navigate('ReceitasBemAvaliadas')
       }
     }
 

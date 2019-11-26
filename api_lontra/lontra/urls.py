@@ -8,4 +8,5 @@ urlpatterns = [
     url('receitas/', views.ReceitaList.as_view(), name='receitas'),
     # url('historico_update/', views.HistoricoUpdate.as_view(), name="historico_update")
     url('tempo/', views.TempoDePreparoList.as_view(), name='tempo'),
+    url('melhores/', views.MelhoresReceitasList.as_view(), name='melhores'),
 ]

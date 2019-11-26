@@ -17,6 +17,7 @@ import AvaliarReceita from './src/AvaliarReceita';
 import PesquisaPorIngredientes from './src/PesquisaPorIngredientes';
 import PesquisaPorTempo from './src/PesquisaPorTempo';
 import ReceitasRetornadas from './src/ReceitasRetornadas';
+import ReceitasBemAvaliadas from './src/ReceitasBemAvaliadas';
 
 const stackNavigation = createStackNavigator(
 	{
@@ -52,6 +53,10 @@ const stackNavigation = createStackNavigator(
 			screen: AvaliarReceita,
 			title: 'Avaliar Receita'
 		},
+		ReceitasBemAvaliadas:{
+			screen: ReceitasBemAvaliadas,
+			title: 'ReceitasBemAvaliadas'
+		}
 	},
 	{
 		defaultNavigationOptions: {

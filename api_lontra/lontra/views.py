@@ -132,3 +132,18 @@ class TempoDePreparoList(generics.ListCreateAPIView):
                     receitas.append(i)
             
         return receitas
+
+
+class MelhoresReceitasList(generics.ListCreateAPIView):
+    query = Receita.objects.all()
+    serializer_class = ReceitaSerializer
+
+    def get_queryset(self):
+        nota = self.request.GET['nota']
+        receitas = []
+
+        for i in Receita.objects.all():
+            if i.nota == int(nota):
+                receitas.append(i)
+
+        return receitas
