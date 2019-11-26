@@ -29,62 +29,89 @@ class ReceitaList(generics.ListCreateAPIView):
         receitas = []
         ingredientes_buscados = self.request.GET['ingredientes'].split(';')
         fator = self.request.GET['fator']
+        print(fator)
 
-        if int(fator) == 100:
-            for receita in Receita.objects.all():
-                ingredientes_receita = receita.ingredientes.split(';')
-                if len(ingredientes_buscados) == len(ingredientes_receita):
-                    flag = 0
+        if ingredientes_buscados[0] == "":
+            return Receita.objects.all()
+        else:
+            if int(fator) == 100:
+                for receita in Receita.objects.all():
+                    ingredientes_receita = receita.ingredientes.split(';')
+                    if len(ingredientes_buscados) == len(ingredientes_receita):
+                        flag = 0
+                        for ingrediente in ingredientes_buscados:
+                            if ingrediente not in ingredientes_receita:
+                                flag = 1
+                        if flag == 0:
+                            receitas.append(receita)
+
+            if int(fator) < 100 and int(fator) >= 90:
+                aux = len(ingredientes_buscados)
+                for receita in Receita.objects.all():
+                    ingredientes_receita = receita.ingredientes.split(';')
+                    cont = 0
                     for ingrediente in ingredientes_buscados:
-                        if ingrediente not in ingredientes_receita:
-                            flag = 1
-                    if flag == 0:
+                        if ingrediente in ingredientes_receita:
+                            cont = cont + 1
+                    if cont == aux and len(ingredientes_receita) - aux <= 1:
                         receitas.append(receita)
 
-        if int(fator) < 100 and int(fator) > 60:
-            for receita in Receita.objects.all():
-                ingredientes_receita = receita.ingredientes.split(';')
+            if int(fator) < 90 and int(fator) >= 80:
                 aux = len(ingredientes_buscados)
-                cont = 0
-                for ingrediente in ingredientes_buscados:
-                   if ingrediente in ingredientes_receita:
-                        cont = cont + 1
-                if cont == aux and len(ingredientes_receita) - aux > 4:
-                    receitas.append(receita)
+                for receita in Receita.objects.all():
+                    ingredientes_receita = receita.ingredientes.split(';')
+                    cont = 0
+                    for ingrediente in ingredientes_buscados:
+                        if ingrediente in ingredientes_receita:
+                            cont = cont + 1
+                    if cont == aux and len(ingredientes_receita) - aux <= 2:
+                        receitas.append(receita)
+                        
+            if int(fator) < 80 and int(fator) > 60:
+                aux = len(ingredientes_buscados)
+                for receita in Receita.objects.all():
+                    ingredientes_receita = receita.ingredientes.split(';')
+                    cont = 0
+                    for ingrediente in ingredientes_buscados:
+                        if ingrediente in ingredientes_receita:
+                            cont = cont + 1
+                    if cont == aux and len(ingredientes_receita) - aux <= 3:
+                        receitas.append(receita)
 
-        if int(fator) <= 60 and int(fator) >= 40:
-            aux = len(ingredientes_buscados)
-            for receita in Receita.objects.all():
-                ingredientes_receita = receita.ingredientes.split(';')
-                cont = 0
-                for ingrediente in ingredientes_buscados:
-                   if ingrediente in ingredientes_receita:
-                        cont = cont + 1
-                if cont == aux:
-                    receitas.append(receita)
-        
-        if int(fator) < 40 and int(fator) > 0:
-            aux = len(ingredientes_buscados)
+            if int(fator) <= 60 and int(fator) >= 40:
+                aux = len(ingredientes_buscados)
+                for receita in Receita.objects.all():
+                    ingredientes_receita = receita.ingredientes.split(';')
+                    cont = 0
+                    for ingrediente in ingredientes_buscados:
+                        if ingrediente in ingredientes_receita:
+                            cont = cont + 1
+                    if cont == aux:
+                        receitas.append(receita)
+            if int(fator) <= 10:
+                for receita in Receita.objects.all():
+                    ingredientes_receita = receita.ingredientes.split(';')
 
-            for receita in Receita.objects.all():
-                ingredientes_receita = receita.ingredientes.split(';')
-                flag = 1
+                    for ingrediente in ingredientes_buscados:
+                        if ingrediente in ingredientes_receita:
+                            receitas.append(receita)
+                            break
 
-                for ingrediente in ingredientes_buscados:
-                   if ingrediente in ingredientes_receita:
-                       flag = flag + 1
+            if int(fator) < 40 and int(fator) > 10:
+                aux = len(ingredientes_buscados)
 
-        
-        if int(fator) == 0:
-            for receita in Receita.objects.all():
-                ingredientes_receita = receita.ingredientes.split(';')
+                for receita in Receita.objects.all():
+                    ingredientes_receita = receita.ingredientes.split(';')
+                    flag = 0
 
-                for ingrediente in ingredientes_buscados:
-                   if ingrediente in ingredientes_receita:
-                       receitas.append(receita)
-                       break
+                    for ingrediente in ingredientes_buscados:
+                        if ingrediente in ingredientes_receita:
+                            flag = flag + 1
+                    if aux - flag <= aux/2:
+                        receitas.append(receita)
             
-        return receitas
+            return receitas
+
 
 
 class TempoDePreparoList(generics.ListCreateAPIView):

@@ -60,7 +60,7 @@ export default class ReceitasBuscadas extends Component {
   async pegarAsReceitasAsync() {
 
     let parametros_passados = this.props.navigation.state.params.parametros
-    const receitas = await buscarReceitasPorIngredientesComFator(parametros_passados, this.props.navigation.state.params.fator).catch(error => console.log(error));
+    const receitas = await Api.buscarReceitasPorIngredientesComFator(parametros_passados, this.props.navigation.state.params.fator).catch(error => console.log(error));
     this.setState({ resultado: receitas.data })
     this.setState({ carregado: true })
 
