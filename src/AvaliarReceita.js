@@ -31,38 +31,7 @@ export default class AvaliarReceita extends Component {
       if(this.state.nota == ''){
           alert('Faça a Avaliação Primeiro')
       }else{
-          //mandar para a api
 
-          /*
-          const receitas_avaliadas = AsyncStorage.getItem('receitasAvaliadas');
-          if(typeof receitas_avaliadas[0] === "undefined"){
-            console.log('criando ...')
-            var receitas = [];
-            receitas.push(this.props.navigation.state.params.item.id);
-
-            AsyncStorage.setItem('receitasAvaliadas', receitas);
-            console.log(receitas)
-            console.log(receitas[0])
-          }else{
-            var flag = new Boolean(true);
-            console.log('já criou o var')
-            console.log(receitas_avaliadas)
-            for(i=0;i<receitas_avaliadas.lenght;i++){
-                console.log(receitas_avaliadas[i])
-                if(receitas_avaliadas[i] == this.props.navigation.state.params.item.id){
-                    flag = false;
-                }
-            }
-            if(flag){
-                receitas_avaliadas.push(this.props.navigation.state.params.item.id)
-                AsyncStorage.setItem('receitasAvaliadas', receitas_avaliadas);
-                alert('Avaliação Feita !!')
-            }else{
-                alert('Receita já avaliada !!')
-
-            }
-
-          }*/
 
       }
   }

@@ -9,4 +9,6 @@ urlpatterns = [
     # url('historico_update/', views.HistoricoUpdate.as_view(), name="historico_update")
     url('tempo/', views.TempoDePreparoList.as_view(), name='tempo'),
     url('melhores/', views.MelhoresReceitasList.as_view(), name='melhores'),
+    url('avaliacoes/', views.AvaliacaoList.as_view(),name='avaliacao'),
+    url('categorias/', views.CategoriaList.as_view(),name='categoria')
 ]

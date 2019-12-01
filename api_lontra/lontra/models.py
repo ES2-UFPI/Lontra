@@ -18,8 +18,7 @@ class Historico(models.Model):
 class Usuario(models.Model):
     token = models.CharField(max_length=255)
     criado_em = models.DateTimeField(auto_now_add=True)
-    historico = models.OneToOneField(Historico, on_delete=models.CASCADE)
-    categoria = models.CharField(max_length=255)
+    
     def __str__(self):
         return self.token
 
@@ -38,3 +37,11 @@ class Receita(models.Model):
 
     def __str__(self):
         return self.nome
+
+class Avaliacao(models.Model):
+    usuario = models.ManyToManyField(Usuario)
+    receita = models.ManyToManyField(Receita)
+    nota = models.IntegerField(default="5")
+
+    def __str__(self):
+        return (self.usuario, self.nome)

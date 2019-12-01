@@ -1,15 +1,14 @@
 import axios from 'axios';
 
 const api = axios.create({ 
-    baseURL: 'http://10.0.0.106:8000' 
+    baseURL: 'http://botufpi.herokuapp.com' 
 });
 
 api.enviarToken = async (token) => {
     await api.post(
         '/usuarios/',
         {
-            'token': '10',
-            'historico': 11
+            'token': '10'
         }
     );
 }
@@ -51,6 +50,7 @@ api.buscarReceitasPorIngredientesComFator = async (parametros, fator) => {
 }
 
 api.receberReceitasBemAvaliadas = async () => {
+    console.log('/melhores/?nota=5')
     return await api.get('/melhores/?nota=5');
 }
 
