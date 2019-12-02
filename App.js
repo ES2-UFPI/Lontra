@@ -143,7 +143,8 @@ export default class App extends Component {
 
 		// Esse token era para ser o Token de Notificação
 		let token = "10"
-		await AsyncStorage.setItem('tokenNotificacao', token);
+		//var json = "{\"token\": \"" + token + "\"}";
+		await AsyncStorage.setItem('token', token);
 		await Api.enviarToken(token).catch(error => console.log(error));
 	}
 

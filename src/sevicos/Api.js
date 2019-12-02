@@ -1,16 +1,36 @@
 import axios from 'axios';
 
 const api = axios.create({ 
-    baseURL: 'http://botufpi.herokuapp.com' 
+    baseURL: 'http://botufpi.herokuapp.com/' 
 });
 
 api.enviarToken = async (token) => {
     await api.post(
         '/usuarios/',
         {
-            'token': '10'
+            'token': token
         }
     );
+}
+
+api.enviarTokenAPI = async (json) => {
+    return await api.post('/usuarios/', json);
+}
+
+api.enviarAvaliacao = async (token, id, nota) => {
+    await api.post(
+        '/avaliacoes',
+        {
+            'nota': nota,
+            'usuario': token,
+            'receita': id
+        }
+    );
+
+}
+
+api.enviarAvaliacaoAPI = async (json) => {
+    return await api.post('/avaliacoes', json);
 }
 
 api.receitas = async (token) => {
@@ -50,7 +70,6 @@ api.buscarReceitasPorIngredientesComFator = async (parametros, fator) => {
 }
 
 api.receberReceitasBemAvaliadas = async () => {
-    console.log('/melhores/?nota=5')
     return await api.get('/melhores/?nota=5');
 }
 
