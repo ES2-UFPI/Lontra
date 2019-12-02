@@ -31,7 +31,7 @@ export default class AvaliarReceita extends Component {
     if (this.state.nota == '') {
       alert('Faça a Avaliação Primeiro')
     } else {
-      await Api.enviarAvaliacao(1, id, parseInt(this.state.nota));
+      //await Api.enviarAvaliacao(10, id, parseInt(this.state.nota));
 
     }
   }

@@ -162,7 +162,7 @@ class MelhoresReceitasList(generics.ListCreateAPIView):
         receitas = []
 
         for i in Receita.objects.all():
-            if i.nota == int(nota):
+            if i.nota >= int(nota):
                 receitas.append(i)
 
         return receitas

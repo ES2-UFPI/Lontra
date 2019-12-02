@@ -70,7 +70,7 @@ api.buscarReceitasPorIngredientesComFator = async (parametros, fator) => {
 }
 
 api.receberReceitasBemAvaliadas = async () => {
-    return await api.get('/melhores/?nota=5');
+    return await api.get('/melhores/?nota=4');
 }
 
 export default api;
