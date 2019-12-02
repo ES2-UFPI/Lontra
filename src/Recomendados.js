@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, FlatList, Image } from 'react-native';
+import Api from './sevicos/Api';
 
 export default class Recomendados extends Component {
 

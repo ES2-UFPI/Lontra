@@ -19,18 +19,18 @@ api.enviarTokenAPI = async (json) => {
 
 api.enviarAvaliacao = async (token, id, nota) => {
     await api.post(
-        '/avaliacoes',
+        '/avaliacoes/',
         {
             'nota': nota,
-            'usuario': token,
-            'receita': id
+            'usuario': [token],
+            'receita': [id.id]
         }
     );
 
 }
 
 api.enviarAvaliacaoAPI = async (json) => {
-    return await api.post('/avaliacoes', json);
+    return await api.post('/avaliacoes/', json);
 }
 
 api.receitas = async (token) => {
