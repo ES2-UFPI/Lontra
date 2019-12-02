@@ -6,7 +6,7 @@ import Api from './sevicos/Api';
 
 export default class ReceitasBemAvaliadas extends Component {
     static navigationOptions = {
-        title: 'Resultados'
+        title: 'Melhores Receitas'
     };
 
     constructor(props) {
