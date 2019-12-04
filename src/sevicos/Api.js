@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({ 
-    baseURL: 'http://10.13.65.85:8000/' 
+    baseURL: 'http://botufpi.herokuapp.com/' 
 });
 
 api.enviarToken = async (token) => {
