@@ -14,12 +14,24 @@ import ReceitasBuscadas from './src/ReceitasBuscadas';
 import telaInicial from './src/telaInicial';
 import Pesquisa from './src/Pesquisa';
 import AvaliarReceita from './src/AvaliarReceita';
+import PesquisaPorIngredientes from './src/PesquisaPorIngredientes';
+import PesquisaPorTempo from './src/PesquisaPorTempo';
+import ReceitasRetornadas from './src/ReceitasRetornadas';
+import ReceitasBemAvaliadas from './src/ReceitasBemAvaliadas';
 
 const stackNavigation = createStackNavigator(
 	{
 		Pesquisa: {
 			screen: Pesquisa,
 			title: 'Pesquisa'
+		},
+		PesquisaPorIngredientes:{
+			screen: PesquisaPorIngredientes,
+			title: 'PesquisaPorIngredientes'
+		},
+		PesquisaPorTempo:{
+			screen: PesquisaPorTempo,
+			title: 'PesquisaPorTempo'
 		},
 		ReceitasBuscadas:{
 			screen: ReceitasBuscadas,
@@ -33,10 +45,18 @@ const stackNavigation = createStackNavigator(
 			screen: Receita,
 			title: 'Receita'
 		},
+		ReceitasRetornadas:{
+			screen: ReceitasRetornadas,
+			title: 'Receitas Retornadas'
+		},
 		AvaliarReceita:{
 			screen: AvaliarReceita,
 			title: 'Avaliar Receita'
 		},
+		ReceitasBemAvaliadas:{
+			screen: ReceitasBemAvaliadas,
+			title: 'ReceitasBemAvaliadas'
+		}
 	},
 	{
 		defaultNavigationOptions: {
@@ -121,10 +141,10 @@ export default class App extends Component {
 			return;
 		}
 
-		console.log("iheihihr")
-		let token = "10"
-		await AsyncStorage.setItem('tokenNotificacao', token);
-		await Api.enviarToken(token).catch(error => console.log(error));
+		// Esse token era para ser o Token de Notificação
+		//let token = "10"
+		//await AsyncStorage.setItem('token', token);
+		//await Api.enviarToken(token).catch(error => console.log(error));
 	}
 
 	async componentWillMount() {
